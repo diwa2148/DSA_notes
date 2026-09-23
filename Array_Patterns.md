@@ -70,3 +70,31 @@ return new int[]{arr[left][1], arr[right][1]}; → returns original indices
 * Sorting → O(n log n)
 * Two Pointers → O(n)
 * Overall → O(n log n)
+
+
+## PREFIX SUM
+
+int[] prefixSum = new int[nums.length]; → creates prefix sum array
+
+prefixSum[0] = nums[0]; → first prefix sum
+
+prefixSum[i] = prefixSum[i - 1] + nums[i]; → current prefix sum
+
+* prefix[i] → sum of elements from index 0 to i
+* Prefix Sum → useful for repeated range/subarray sum calculations
+* Range sum from l to r → prefix[r] - prefix[l - 1]
+* If l == 0 → range sum = prefix[r]
+* Prefix Sum preprocessing → O(n)
+* Each range sum query → O(1)
+
+
+## SLIDING WINDOW
+
+newSum = oldSum - leavingElement + enteringElement; → updates window sum when window moves
+
+* Sliding Window → used for continuous subarrays/substrings
+* Fixed-size window → maintains exactly k elements
+* Window update → O(1)
+* Processing all windows → O(n)
+* Without Sliding Window → repeated calculation can be O(n²)
+* Sliding Window → can reduce O(n²) to O(n)
