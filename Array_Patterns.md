@@ -90,11 +90,59 @@ prefixSum[i] = prefixSum[i - 1] + nums[i]; → current prefix sum
 
 ## SLIDING WINDOW
 
-newSum = oldSum - leavingElement + enteringElement; → updates window sum when window moves
+### 1. Fixed-Size Sliding Window
 
-* Sliding Window → used for continuous subarrays/substrings
-* Fixed-size window → maintains exactly k elements
+* Window size remains fixed, usually `k`
+* Used for problems involving exactly `k` consecutive elements
+* Example → maximum sum of `k` consecutive elements
+
+newSum = oldSum - leavingElement + enteringElement; → slides the window by one position
+
 * Window update → O(1)
 * Processing all windows → O(n)
-* Without Sliding Window → repeated calculation can be O(n²)
-* Sliding Window → can reduce O(n²) to O(n)
+
+### 2. Variable-Size Sliding Window
+
+* Window size changes based on a condition
+* `right++` → expands the window
+* `left++` → shrinks the window when the condition is violated
+* Used for longest/shortest subarray or substring satisfying a condition
+
+Pattern:
+expand → condition violated → shrink → continue
+
+* Sliding Window can reduce repeated O(n²) calculations to O(n)
+
+
+## KADANE'S ALGORITHM
+
+currentSum = Math.max(nums[i], currentSum + nums[i]); → decides whether to start a new subarray or continue the current one
+
+maxSum = Math.max(maxSum, currentSum); → stores the maximum sum found
+
+* Kadane's Algorithm → finds maximum sum of a contiguous subarray
+* At each element → choose between starting fresh or continuing the previous subarray
+* If previous sum hurts the current sum → start a new subarray
+* Time → O(n)
+* Space → O(1)
+
+
+## BINARY SEARCH
+
+int left = 0; → starts search from beginning
+
+int right = nums.length - 1; → starts search from end
+
+int mid = left + (right - left) / 2; → finds middle index safely
+
+nums[mid] == target → target found
+
+nums[mid] < target → left = mid + 1
+
+nums[mid] > target → right = mid - 1
+
+* Binary Search → used to search efficiently in a sorted array
+* Each comparison eliminates half of the remaining search space
+* Sorted array → key requirement for standard Binary Search
+* Time → O(log n)
+* Space → O(1)
